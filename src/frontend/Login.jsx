@@ -10,12 +10,13 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       await axios.post('/login', { username, password });
       setErrorMessage('Login successful!');
-      // Optionally redirect to a dashboard later
+      navigate("/searchBar");
     } catch (err) {
       setErrorMessage('Login failed.');
     }
