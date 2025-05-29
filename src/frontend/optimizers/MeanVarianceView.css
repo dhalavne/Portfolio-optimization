@@ -1,0 +1,59 @@
+.mv-container {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    margin-top: 24px;
+  }
+  
+  .mv-header {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1f2937;
+  }
+  
+  .mv-section {
+    margin-bottom: 24px;
+  }
+  
+  .mv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  
+  .mv-table th,
+  .mv-table td {
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    text-align: left;
+  }
+  
+  .mv-table th {
+    background-color: #f3f4f6;
+  }
+  
+  .mv-metrics {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .mv-metrics li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .mv-error {
+    color: #b91c1c;
+    background-color: #fef2f2;
+    padding: 12px;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+  }
+
+  .mv-chart-container {
+    max-width: 400px;
+    margin: 0 auto 20px;
+  }
+  

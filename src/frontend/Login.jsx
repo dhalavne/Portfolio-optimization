@@ -16,7 +16,7 @@ export default function Login() {
     try {
       await axios.post('/login', { username, password });
       setErrorMessage('Login successful!');
-      navigate("/searchBar");
+      navigate("/portfolioUI");
     } catch (err) {
       setErrorMessage('Login failed.');
     }

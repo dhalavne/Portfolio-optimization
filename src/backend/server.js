@@ -11,6 +11,7 @@ import bcrypt from 'bcrypt';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import axios from 'axios';
+import portfolioRoutes from './routes/portfolioRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -87,43 +88,43 @@ app.post('/login', (req, res) => {
   });
 });
 
-// app.get('/api/search', (req, res) => {
-//   const { query } = req.query;
-//   const apiKey = process.env.ALPHA_VANTAGE_KEY;
-//   console.log(apiKey);
-//   const results = [
-//     { symbol: 'AAPL', name: 'Apple Inc.' },
-//     { symbol: 'GOOG', name: 'Alphabet Inc.' },
-//     { symbol: 'TSLA', name: 'Tesla Inc.' },
-//   ].filter((item) =>
-//     item.symbol.toLowerCase().includes(query.toLowerCase())
-//   );
-//   res.json(results);
-// });
-
-app.get('/api/search', async (req, res) => {
+app.get('/api/search', (req, res) => {
   const { query } = req.query;
   const apiKey = process.env.ALPHA_VANTAGE_KEY;
   console.log(apiKey);
-
-  try {
-    const response = await axios.get(
-      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${apiKey}`
-    );
-
-    console.log(response);
-
-    const matches = response.data.bestMatches.map((match) => ({
-      symbol: match['1. symbol'],
-      name: match['2. name'],
-    }));
-
-    res.json(matches);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Search failed' });
-  }
+  const results = [
+    { symbol: 'AAPL', name: 'Apple Inc.' },
+    { symbol: 'GOOG', name: 'Alphabet Inc.' },
+    { symbol: 'TSLA', name: 'Tesla Inc.' },
+  ].filter((item) =>
+    item.symbol.toLowerCase().includes(query.toLowerCase())
+  );
+  res.json(results);
 });
+
+// app.get('/api/search', async (req, res) => {
+//   const { query } = req.query;
+//   const apiKey = process.env.ALPHA_VANTAGE_KEY;
+//   console.log(apiKey);
+
+//   try {
+//     const response = await axios.get(
+//       `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${apiKey}`
+//     );
+
+//     console.log(response);
+
+//     const matches = response.data.bestMatches.map((match) => ({
+//       symbol: match['1. symbol'],
+//       name: match['2. name'],
+//     }));
+
+//     res.json(matches);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: 'Search failed' });
+//   }
+// });
 
 function authenticateToken(req, res, next) {
   const token = req.cookies.token;
@@ -146,6 +147,8 @@ app.post('/logout', (req, res) => {
   res.clearCookie('token');
   res.json({ message: 'Logged out successfully' });
 });
+
+app.use('/api/portfolio', portfolioRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
